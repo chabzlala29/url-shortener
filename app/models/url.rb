@@ -4,6 +4,20 @@ class Url < ApplicationRecord
 
   before_create :generate_short_url
 
+  def new_url?
+    duplicated_url.nil?
+  end
+
+  def duplicated_url
+    Url.find_by(slugified_url: self.slugified_url)
+  end
+
+  def slugify_url
+    self.slugified_url = original_url.downcase.gsub(/(www\.)|(https?:\/\/)/, "")
+    self.slugified_url.slice!(-1) if slugified_url[-1] == "/"
+    self.slugified_url = "http://#{self.slugified_url}"
+  end
+
   private
 
   def generate_short_url

@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_23_062515) do
+ActiveRecord::Schema.define(version: 2018_05_24_153719) do
 
   create_table "urls", force: :cascade do |t|
     t.string "original_url"
     t.string "shorten_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slugified_url"
   end
 
 end

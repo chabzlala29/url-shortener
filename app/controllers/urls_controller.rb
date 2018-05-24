@@ -5,7 +5,11 @@ class UrlsController < ApplicationController
 
   def create
     @url = Url.new(url_params)
-    @url.save
+    @url.slugify_url
+
+    if @url.new_url?
+      @url.save
+    end
   end
 
   private
