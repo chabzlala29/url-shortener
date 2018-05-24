@@ -2,3 +2,20 @@
   %h5 Click to copy shorten url:
   %p
     %span= "#{request.base_url}/#{@url.shorten_url}"
+  %p.copied Copied to clipboard!
+
+:javascript
+  $(function(){
+    $(".shorten-url").on("click", function(){
+      var $temp = $("<input>");
+      $("body").append($temp);
+      $temp.val($("span").text()).select();
+      document.execCommand("copy");
+      $temp.remove();
+
+      $(".copied").
+        show().
+        delay(3000).
+        fadeOut();
+    })
+  })
