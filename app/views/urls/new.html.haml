@@ -3,9 +3,9 @@
     %h1.h3.mb-3.font-weight-normal URL Shortener
     %p by Charles Darwin Pobre
   .input-group.mb-3
-    %input.form-control{placeholder: "A very long URL", :type => "text"}/
+    = f.text_field :original_url, placeholder: "A very long URL", class: "form-control"
     .input-group-append
-      %button.btn.btn-outline-success{:type => "button"} Shorten!
+      = f.submit "Shorten!", class: "btn btn-outline-success"
 
 .border.shorten-url
   %h5 Click to copy shorten url:
