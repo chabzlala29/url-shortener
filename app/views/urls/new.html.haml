@@ -1,0 +1,15 @@
+= form_for @url, html: { class: "form-signin" } do |f|
+  .text-center.mb-4
+    %h1.h3.mb-3.font-weight-normal URL Shortener
+    %p by Charles Darwin Pobre
+  .input-group.mb-3
+    %input.form-control{placeholder: "A very long URL", :type => "text"}/
+    .input-group-append
+      %button.btn.btn-outline-success{:type => "button"} Shorten!
+
+.border.shorten-url
+  %h5 Click to copy shorten url:
+  %p
+    %span http://shorten-upbla.herokuapp.com/asdasdasdasd
+
+%p.mt-5.mb-3.text-muted.text-center © Charles Darwin Pobre, 2018
