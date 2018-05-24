@@ -4,6 +4,8 @@ class Url < ApplicationRecord
 
   before_create :generate_short_url
 
+  private
+
   def generate_short_url
 		self.shorten_url = loop do
 			random_str = SecureRandom.base58(7)

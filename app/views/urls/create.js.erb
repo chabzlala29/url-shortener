@@ -1,1 +1,3 @@
-alert("saved!")
+<% if @url.persisted? %>
+  $(".shorten-url-wrapper").html("<%= j render("/urls/shorten_url", locals: { url: @url }) %>");
+<% end %>
