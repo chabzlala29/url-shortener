@@ -3,7 +3,7 @@
     %h1.h3.mb-3.font-weight-normal URL Shortener
     %p by Charles Darwin Pobre
   .input-group.mb-3
-    = f.text_field :original_url, placeholder: "A very long URL", class: "form-control"
+    = f.url_field :original_url, placeholder: "A very long URL", class: "form-control", required: true
     .input-group-append
       = f.submit "Shorten!", class: "btn btn-outline-success"
 
