@@ -13,6 +13,8 @@ class UrlsController < ApplicationController
 
     if @url.new_url?
       @url.save
+    else
+      @url = @url.duplicated_url
     end
   end
 
