@@ -1,6 +1,7 @@
 class UrlsController < ApplicationController
   def show
     @url = Url.find_by(shorten_url: params[:short_url])
+    @url.increment!(:visits, 1)
     @url.update_info!(request)
 
     redirect_to @url.original_url

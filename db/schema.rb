@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_25_084046) do
+ActiveRecord::Schema.define(version: 2018_05_25_090256) do
 
   create_table "url_infos", force: :cascade do |t|
     t.string "ip"
@@ -22,6 +22,9 @@ ActiveRecord::Schema.define(version: 2018_05_25_084046) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "url_id"
+    t.datetime "last_visited_at"
+    t.string "device_name"
+    t.string "browser"
     t.index ["url_id"], name: "index_url_infos_on_url_id"
   end
 
@@ -31,6 +34,7 @@ ActiveRecord::Schema.define(version: 2018_05_25_084046) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slugified_url"
+    t.bigint "visits"
   end
 
 end
