@@ -1,6 +1,11 @@
 class UrlsController < ApplicationController
+  before_action :set_url, only: [:index, :show]
+
   def show
-    @url = Url.find_by(shorten_url: params[:short_url])
+    @url_infos = @url.url_infos.page(params[:page])
+  end
+
+  def index
     @url.increment!(:visits, 1)
     @url.update_info!(request)
 
@@ -26,5 +31,9 @@ class UrlsController < ApplicationController
 
   def url_params
     params.require(:url).permit(:original_url)
+  end
+
+  def set_url
+    @url = Url.find_by(shorten_url: params[:short_url])
   end
 end

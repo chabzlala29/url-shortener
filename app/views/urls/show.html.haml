@@ -1,0 +1,19 @@
+.url-info-head
+  %h1.display-4 Short URL data:
+  %h1.display-4
+    = "#{request.base_url}/#{@url.shorten_url}"
+
+.url-info
+  %table.table#url-infos
+    %thead.thead-dark
+      %tr
+        %th{:scope => "col"} IP Address
+        %th{:scope => "col"} Country
+        %th{:scope => "col"} City
+        %th{:scope => "col"} Device
+        %th{:scope => "col"} Browser
+        %th{:scope => "col"} Last Visited
+    %tbody.page
+      = render @url_infos
+
+  = paginate @url_infos, theme: "twitter-bootstrap-4"

@@ -1,0 +1,7 @@
+%tr
+  %th{:scope => "row"}= url_info.ip
+  %td= url_info.country || "N/A"
+  %td= url_info.city || "N/A"
+  %td= url_info.device_name || "Unknown"
+  %td= url_info.browser || "N/A"
+  %td= url_info.last_visited_at
