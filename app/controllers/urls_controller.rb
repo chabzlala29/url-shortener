@@ -13,12 +13,15 @@ class UrlsController < ApplicationController
   def index
     @url.increment!(:visits, 1)
     @url.update_info!(request)
+    session[:sessioned_url_ids] ||= []
+    session[:sessioned_url_ids] << @url.id unless session[:sessioned_url_ids].include?(@url.id)
 
     redirect_to @url.original_url
   end
 
   def new
     @url = Url.new
+    @sessioned_urls = Url.where(id: session[:sessioned_url_ids])
   end
 
   def create

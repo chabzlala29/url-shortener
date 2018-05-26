@@ -1,7 +1,7 @@
 .border.shorten-url
   %h5 Click to copy shorten url:
   %p
-    %span= "#{request.base_url}/#{@url.shorten_url}"
+    %span#span-shorten-url= full_shorten_url(@url)
   %p.copied Copied to clipboard!
 
 :javascript
@@ -9,7 +9,7 @@
     $(".shorten-url").on("click", function(){
       var $temp = $("<input>");
       $("body").append($temp);
-      $temp.val($("span").text()).select();
+      $temp.val($("span#span-shorten-url").text()).select();
       document.execCommand("copy");
       $temp.remove();
 

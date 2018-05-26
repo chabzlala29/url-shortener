@@ -8,6 +8,12 @@ class Url < ApplicationRecord
 
   before_create :generate_short_url
 
+  def last_visited_at
+    url_infos.last.last_visited_at
+  rescue
+    nil
+  end
+
   def new_url?
     duplicated_url.nil?
   end
