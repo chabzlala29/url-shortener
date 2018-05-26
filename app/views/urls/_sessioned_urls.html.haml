@@ -1,13 +1,14 @@
-.sessioned-urls-wrapper
-  %h5.session-head Recently generated short URLs:
-  %p.session-head Click to see full information
+- if @sessioned_urls.present?
+  .sessioned-urls-wrapper
+    %h5.session-head Recently generated short URLs:
+    %p.session-head Click to see full information
 
-  .list-group
-    - @sessioned_urls.each do |url|
-      = link_to "/data/#{url.shorten_url}", class: "list-group-item list-group-item-action flex-column align-items-start" do
-        .d-flex.w-100.justify-content-between
-          %h5.mb-1= full_shorten_url(url)
-          %small= distance_of_time_in_words(url.last_visited_at, Time.zone.now)
-        %small
-          Original URL:
-          %span= url.original_url
+    .list-group
+      - @sessioned_urls.each do |url|
+        = link_to "/data/#{url.shorten_url}", class: "list-group-item list-group-item-action flex-column align-items-start" do
+          .d-flex.w-100.justify-content-between
+            %h5.mb-1= full_shorten_url(url)
+            %small= distance_of_time_in_words(url.last_visited_at, Time.zone.now)
+          %small
+            Original URL:
+            %span= url.original_url
