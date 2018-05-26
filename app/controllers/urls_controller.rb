@@ -3,6 +3,11 @@ class UrlsController < ApplicationController
 
   def show
     @url_infos = @url.url_infos.page(params[:page])
+
+    respond_to do |f|
+      f.html
+      f.json { render json: @url, include: [:url_infos] }
+    end
   end
 
   def index
