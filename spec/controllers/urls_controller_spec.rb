@@ -1,6 +1,31 @@
 require "rails_helper"
 
 RSpec.describe UrlsController, type: :controller do
+  describe "GET show" do
+    let(:short_url) { url.shorten_url }
+    let(:url) { create(:url) }
+
+    before(:each) { get :show, params: { short_url: short_url } }
+
+    it { expect(response).to be_success }
+    it { expect(assigns(:url)).to be_an_instance_of(Url) }
+    it { expect(assigns(:url)).to eq(url) }
+    it { expect(response).to render_template(:show) }
+  end
+
+  describe "GET show as JSON" do
+    let(:short_url) { url.shorten_url }
+    let(:url) { create(:url) }
+
+    it "return correct data" do
+      get :show, params: { short_url: short_url }, format: :json
+      json_data = JSON.parse(response.body)
+      expect(json_data["id"]).to eq(url.id)
+      expect(json_data["original_url"]).to eq(url.original_url)
+      expect(json_data["shorten_url"]).to eq(url.shorten_url)
+    end
+  end
+
   describe "GET new" do
     before(:each) { get :new }
 
@@ -46,5 +71,18 @@ RSpec.describe UrlsController, type: :controller do
         }.to_not change(Url, :count)
       end
     end
+  end
+
+  describe "GET index" do
+    let(:short_url) { url.shorten_url }
+    let(:url) { create(:url) }
+
+    before(:each) { get :index, params: { short_url: short_url } }
+
+    it { expect(response).to redirect_to(url.original_url) }
+    it { expect(assigns(:url)).to be_an_instance_of(Url) }
+    it { expect(assigns(:url).visits).to eq(1) }
+    it { expect(request.session[:sessioned_url_ids]).to eq([url.id]) }
+    it { expect(assigns(:url).url_infos.count).to eq(1) }
   end
 end
