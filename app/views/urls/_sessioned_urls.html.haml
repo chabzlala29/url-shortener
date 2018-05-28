@@ -5,10 +5,12 @@
 
     .list-group
       - @sessioned_urls.each do |url|
-        = link_to "/data/#{url.shorten_url}", class: "list-group-item list-group-item-action flex-column align-items-start" do
+        .list-group-item.list-group-item-action.flex-column.align-items-start
           .d-flex.w-100.justify-content-between
             %h5.mb-1= full_shorten_url(url)
             %small= distance_of_time_in_words(url.last_visited_at, Time.zone.now)
           %small
             Original URL:
-            %span= url.original_url
+            %span= link_to url.original_url, url.original_url, target: :_blank
+          %p
+            %small= link_to "more details", "/data/#{url.shorten_url}"
